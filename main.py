@@ -7,11 +7,18 @@
 # ------------------------------------------------------------------------
 
 import convert_maze
+import bfs
+
 
 file = "smallMaze.lay"
 
-g = convert_maze.get_maze(file)
+graph, start, goal = convert_maze.get_maze(file)
 
+
+b = bfs.bfs(graph,start,goal)
+b.search()
+
+#getting size of maze
 maze_file = open(file, "r")
 data = maze_file.read()
 maze_file.close()
@@ -21,8 +28,8 @@ length = len(data)
 text = ''
 
 for x in range(length):
-    if (x+1) in g.get_vertices():
-        text += g.get_vertex(x+1).get_content()
+    if (x+1) in graph.get_vertices():
+        text += graph.get_vertex(x + 1).get_content()
     else:
         text += '%'
 

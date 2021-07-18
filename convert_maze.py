@@ -23,6 +23,9 @@ def get_maze(file):
     # go to start of file
     maze_file.seek(0)
 
+    start_node = 0
+    goal_node = 0
+
     # Find every blank space (or P or .) in the file then add to graph
     for line in maze_file:
         col = 1
@@ -30,6 +33,12 @@ def get_maze(file):
 
             if char != '%':
                 maze_graph.add_vertex(pos, char, row, col)
+
+            if char == 'P':
+                start_node = pos
+
+            if char == '.':
+                goal_node = pos
 
             pos += 1
             col += 1
@@ -59,4 +68,4 @@ def get_maze(file):
 
     maze_file.close()
 
-    return maze_graph
+    return maze_graph, start_node, goal_node
