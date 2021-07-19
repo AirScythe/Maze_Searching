@@ -4,9 +4,12 @@
 # Date:7/20/2021
 # Name: Anthony Dawson
 # Student ID: 025434121
+
+# As a guide, used pseudocode from
+# "Breadth First Search Algorithm | Shortest Path | Graph Theory" by WilliamFiset
 # ------------------------------------------------------------------------
 
-import  graph
+import graph
 
 class bfs(object):
 
@@ -28,15 +31,15 @@ class bfs(object):
     def search(self):
 
         self.maze_queue.append(self.start_node)
+        self.explored.append(self.start_node)
 
         while self.maze_queue != []:
 
             current_node = self.maze_queue.pop(0)
-            self.explored.append(current_node)
 
             self.expanded_nodes += 1
-            #print("->", current_node.get_id())
 
+            #The node has been expaned and now we are adding their neighbors
             for c in current_node.get_connections():
 
                 if c not in self.explored:
@@ -45,11 +48,15 @@ class bfs(object):
                     self.prev[c] = current_node
 
             if current_node == self.goal_node:
-                print("At the end")
                 print("Expanded", self.expanded_nodes, "nodes!")
 
-        #for x in self.prev.values():
-        #    print(x.get_id())
+                #The max fringes (frontier) are the unexpanded nodes
+                print("Frontier:", len(self.maze_queue))
+
+                break
+
+        # for x in self.explored:
+        #     print(x.get_id())
 
 
 
@@ -62,9 +69,11 @@ class bfs(object):
             self.path.append(at.get_id())
             at = self.prev[at]
 
-        #self.path.append(at.get_id())
+
+        self.path.append(at.get_id())
 
         #for x in self.path:
         #   print(x)
+        self.path.reverse()
 
         return self.path
