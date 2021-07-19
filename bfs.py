@@ -22,6 +22,8 @@ class bfs(object):
 
         self.expanded_nodes = 0
 
+        self.prev = {}
+
 
     def search(self):
 
@@ -33,18 +35,36 @@ class bfs(object):
             self.explored.append(current_node)
 
             self.expanded_nodes += 1
-            print("->", current_node.get_id())
+            #print("->", current_node.get_id())
 
             for c in current_node.get_connections():
 
                 if c not in self.explored:
                     self.maze_queue.append(c)
                     self.explored.append(c)
+                    self.prev[c] = current_node
 
             if current_node == self.goal_node:
                 print("At the end")
                 print("Expanded", self.expanded_nodes, "nodes!")
 
+        #for x in self.prev.values():
+        #    print(x.get_id())
+
+
 
     def get_path(self):
-        pass
+        self.path = []
+
+        at = self.goal_node
+
+        while at != self.start_node:
+            self.path.append(at.get_id())
+            at = self.prev[at]
+
+        #self.path.append(at.get_id())
+
+        #for x in self.path:
+        #   print(x)
+
+        return self.path
