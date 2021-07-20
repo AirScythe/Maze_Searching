@@ -39,7 +39,11 @@ class Vertex:
     def __init__(self, node, content, row, col):
         self.id = node
         self.adjacent = {}
+
+        # content is the character at this position in the maze
         self.content = content
+
+        # row and column number for the heuristics
         self.row = row
         self.col = col
 
@@ -69,7 +73,8 @@ class Vertex:
         else:
             return 0    # return 0 if no connection
 
-    # h(n)
+    # h(n) Heuristic for the estimated distance between this node nad the goal
+    # Manhattan value
     def get_dist(self, node):
         x = abs(self.row - node.get_row())
         y = abs(self.col - node.get_col())

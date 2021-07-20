@@ -20,11 +20,13 @@ class bfs(object):
         self.start_node = self.maze_graph.get_vertex(start)
         self.goal_node = self.maze_graph.get_vertex(goal)
 
+        # list will track which nodes to process and which have been explored
         self.maze_queue = []
         self.explored = []
 
         self.expanded_nodes = 0
 
+        # keep track of which vertex nodes came right before each other
         self.prev = {}
 
 
@@ -33,47 +35,51 @@ class bfs(object):
         self.maze_queue.append(self.start_node)
         self.explored.append(self.start_node)
 
+        # The loop will keep going until either all the nodes have been process or the goal has been found
         while self.maze_queue != []:
 
+            # processing the earliest node entered into the queue
             current_node = self.maze_queue.pop(0)
 
             self.expanded_nodes += 1
 
-            #The node has been expaned and now we are adding their neighbors
-            for c in current_node.get_connections():
+            #The node has been expaned and now we are adding their neighbors to the queue
+            for n in current_node.get_connections():
 
-                if c not in self.explored:
-                    self.maze_queue.append(c)
-                    self.explored.append(c)
-                    self.prev[c] = current_node
+                # If the neighbor has not been explored,
+                # it's added to the queue, marked explored, and it's prev node is tracked
+                if n not in self.explored:
+                    self.maze_queue.append(n)
+                    self.explored.append(n)
+                    self.prev[n] = current_node
 
+            # Break the loop once the goal node has been found
             if current_node == self.goal_node:
+
                 print("Expanded", self.expanded_nodes, "nodes!")
 
-                #The max fringes (frontier) are the unexpanded nodes
+                # The max fringes (frontier) are the unexpanded nodes
                 print("Frontier:", len(self.maze_queue))
 
                 break
 
-        # for x in self.explored:
-        #     print(x.get_id())
-
-
-
+    # Starting from the goal node, look at the previous node for each node connected to the goal
     def get_path(self):
+
         self.path = []
 
-        at = self.goal_node
+        # start at the goal node
+        n = self.goal_node
 
-        while at != self.start_node:
-            self.path.append(at.get_id())
-            at = self.prev[at]
+        # Each nod in the 'prev' dictionary marks which node came before it,
+        # Get the id of the previous node for each node until we reach the starting node
+        while n != self.start_node:
+            self.path.append(n.get_id())
+            n = self.prev[n]
 
+        self.path.append(n.get_id())
 
-        self.path.append(at.get_id())
-
-        #for x in self.path:
-        #   print(x)
+        # reorder the path list so that it begins with the starting node and ends with the goal
         self.path.reverse()
 
         return self.path
