@@ -3,7 +3,6 @@
 #
 # Date:7/20/2021
 # Name: Anthony Dawson
-# Student ID: 025434121
 
 # ------------------------------------------------------------------------
 
@@ -17,7 +16,7 @@ file = "smallMaze.lay"
 #file = "mediumMaze.lay"
 #file = "bigMaze.lay"
 
-# Call the converter to return a grpah of the maze and the id for the nodes of the start and goal of the maze
+# Call the converter to return a graph of the maze and the id for the nodes of the start and goal of the maze
 graph, start, goal = convert_maze.get_maze(file)
 
 # ----------CHOOSE WHICH ALGORITHM TO RUN--------------

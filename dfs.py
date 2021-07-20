@@ -3,7 +3,6 @@
 #
 # Date:7/20/2021
 # Name: Anthony Dawson
-# Student ID: 025434121
 
 # As a guide, used pseudocode from
 # "Breadth First Search Algorithm | Shortest Path | Graph Theory" by WilliamFiset
@@ -43,8 +42,11 @@ class dfs(object):
 
             self.expanded_nodes += 1
 
+            neighbors = current_node.get_connections().keys()
+
             #The node has been expaned and now we are adding their neighbors to the queue
-            for n in current_node.get_connections():
+            #The neighbors list was reversed so that the first child of the current node will processes first
+            for n in reversed(neighbors):
 
                 # If the neighbor has not been explored,
                 # it's added to the queue, marked explored, and it's prev node is tracked

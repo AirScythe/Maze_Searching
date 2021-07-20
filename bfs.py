@@ -1,9 +1,8 @@
 # ------------------------------------------------------------------------
-# Breathe-First Search of maze
+# Breadth-First Search of maze
 #
 # Date:7/20/2021
 # Name: Anthony Dawson
-# Student ID: 025434121
 
 # As a guide, used pseudocode from
 # "Breadth First Search Algorithm | Shortest Path | Graph Theory" by WilliamFiset
