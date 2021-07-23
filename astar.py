@@ -3,7 +3,6 @@
 #
 # Date:7/20/2021
 # Name: Anthony Dawson
-#
 
 # ------------------------------------------------------------------------
 
@@ -30,6 +29,8 @@ class astar(object):
 
 
     def search(self):
+
+        print("A* Search")
 
         #Each value in the maze_queue dictionary has the f() value for each node
         self.maze_queue[self.start_node] = 0 + self.start_node.get_dist(self.goal_node)

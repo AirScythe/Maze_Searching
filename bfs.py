@@ -31,6 +31,8 @@ class bfs(object):
 
     def search(self):
 
+        print("Breadth-First Search")
+
         self.maze_queue.append(self.start_node)
         self.explored.append(self.start_node)
 
